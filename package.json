@@ -1,0 +1,24 @@
+{
+  "name": "dotty",
+  "version": "0.0.1",
+  "description": "Circle-based sprite editor",
+  "main": "src/main.js",
+  "scripts": {
+    "build": "rollup -c",
+    "lint": "standard rollup.config.js 'src/**/*.js'",
+    "start": "serve dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Andrew J. Baker <andrew_j_baker2@hotmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "kontra": "^6.2.2",
+    "serve": "^11.1.0"
+  },
+  "devDependencies": {
+    "rollup": "^1.19.4",
+    "rollup-plugin-copy": "^3.1.0",
+    "standard": "^13.1.0"
+  }
+}
