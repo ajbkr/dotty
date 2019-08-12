@@ -1,4 +1,5 @@
 import copy from 'rollup-plugin-copy'
+import serve from 'rollup-plugin-serve'
 
 export default {
   external: [
@@ -24,6 +25,7 @@ export default {
           src: 'node_modules/kontra/kontra.js'
         }
       ]
-    })
+    }),
+    serve('dist')
   ]
 }
