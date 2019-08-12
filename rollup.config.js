@@ -1,4 +1,5 @@
 import copy from 'rollup-plugin-copy'
+import htmlBundle from 'rollup-plugin-html-bundle'
 import serve from 'rollup-plugin-serve'
 
 export default {
@@ -18,13 +19,13 @@ export default {
       targets: [
         {
           dest: 'dist',
-          src: 'src/index.html'
-        },
-        {
-          dest: 'dist',
           src: 'node_modules/kontra/kontra.js'
         }
       ]
+    }),
+    htmlBundle({
+      inline: true,
+      target: 'dist/index.html'
     }),
     serve('dist')
   ]
