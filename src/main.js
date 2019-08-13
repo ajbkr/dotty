@@ -42,22 +42,44 @@ const palette = [
 
 const paletteEntries = []
 
-palette.forEach((color, index) => {
-  const radius = (canvas.height < canvas.width ? canvas.height / palette.length
-    : canvas.width / palette.length) / 2 - 1
+const radius = () => (canvas.height < canvas.width
+  ? canvas.height / palette.length
+  : canvas.width / palette.length) / 2
 
+palette.forEach((color, index) => {
   paletteEntries.push(Sprite({
     color,
-    width: radius,
-    x: radius + index * (radius * 2 + 2),
-    y: radius,
+    width: radius() * 2,
+    x: radius() + index * (radius() * 2),
+    y: radius(),
 
     render () {
-      fillCircle(this.x, this.y, this.width, this.color)
-      strokeCircle(this.x, this.y, this.width, '#fff')
+      fillCircle(this.x, this.y, this.width / 2, this.color)
+      strokeCircle(this.x, this.y, this.width / 2, '#fff')
     }
   }))
 })
+
+const currentColor = Sprite({
+  color: palette[0],
+  width: radius() * 2,
+  x: radius() + (palette.length + 1) * (radius() * 2),
+  y: radius(),
+
+  render () {
+    fillCircle(this.x, this.y, this.width / 2, this.color)
+    strokeCircle(this.x, this.y, this.width / 2, '#fff')
+  }
+})
+
+canvas.addEventListener('click', ({ pageX, pageY }) => {
+  const index = Math.floor(pageX / (radius * 2))
+
+  window.alert(index)
+  if (index < palette.length && pageY < radius() * 2) {
+    currentColor.color = palette[index]
+  }
+}, false)
 
 const loop = GameLoop({
   update () {
@@ -71,6 +93,8 @@ const loop = GameLoop({
     paletteEntries.forEach(paletteEntry => {
       paletteEntry.render()
     })
+
+    currentColor.render()
   }
 })
 
