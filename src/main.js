@@ -122,6 +122,17 @@ const grid = Sprite({
           this.y + y * ((quarterRadius() * 2) * N), quarterRadius() * 4, '#fff')
       }
     }
+
+    const hitBoxWidth = radius()
+
+    for (let y = 0; y < 8; ++y) {
+      for (let x = 0; x < 8; ++x) {
+        context.fillStyle = '#f00'
+        context.fillRect(this.x - hitBoxWidth / 2 + x * ((quarterRadius() * 2) * N),
+          this.y - hitBoxWidth / 2 + y * ((quarterRadius() * 2) * N), hitBoxWidth,
+          hitBoxWidth)
+      }
+    }
   }
 })
 
@@ -135,6 +146,12 @@ canvas.addEventListener('click', ({ pageX, pageY }) => {
   if (index < sizes.length && pageY >= 2 * (radius() * 2) &&
     pageY < 3 * (radius() * 2)) {
     currentSize.size = sizes[index]
+  }
+
+  const gridIndex = Math.floor((pageX - quarterRadius()) / (quarterRadius() * 4))
+
+  if (gridIndex < 8 && pageY >= 4 * (radius() * 2)) {
+    window.alert(gridIndex)
   }
 }, false)
 
